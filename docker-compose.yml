@@ -7,17 +7,17 @@ services:
   basketdb:
        image: redis:alpine
 
-  portainer:
-       image: portainer/portainer-ce
+  #portainer:
+  #     image: portainer/portainer-ce
 
-  discountdb:
-    image: postgres
+  #discountdb:
+  #  image: postgres
 
-  pgadmin:
-    image: dpage/pgadmin4
+  #pgadmin:
+  #  image: dpage/pgadmin4
     
-  rabbitmq:
-        image: rabbitmq:3-management-alpine
+  #rabbitmq:
+  #      image: rabbitmq:3-management-alpine
 
 
   catalogapi:
@@ -32,14 +32,14 @@ services:
       context: .
       dockerfile: src/Basket/BasketApii/Dockerfile
 
-  discount.api:
-    image: ${DOCKER_REGISTRY-}discountapi
-    build:
-      context: .
-      dockerfile: src/Discount/Discount.Api/Dockerfile
+#  discount.api:
+#    image: ${DOCKER_REGISTRY-}discountapi
+#    build:
+#      context: .
+#      dockerfile: src/Discount/Discount.Api/Dockerfile
 
-volumes:
-  mongo_data:
-  portainer_data:
-  postgres_data:
-  pgadmin_data:
+#volumes:
+#  mongo_data:
+#  portainer_data:
+#  postgres_data:
+#  pgadmin_data:
