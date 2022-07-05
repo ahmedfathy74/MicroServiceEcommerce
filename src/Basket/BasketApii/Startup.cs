@@ -1,5 +1,7 @@
 using BasketApii.Repositories;
 using BasketApii.Repositories.interfaces;
+using EventBusRabbitMQ;
+using EventBusRabbitMQ.Producer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using RabbitMQ.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,25 +47,26 @@ namespace BasketApii
 
             services.AddAutoMapper(typeof(Startup));
             //add rabbit mq connection 
-            //services.AddSingleton<IRabbitMQConnection>(sp =>
-            //{
-            //    var factory = new ConnectionFactory()
-            //    {
-            //        HostName = Configuration["EventBus:HostName"]
-            //    };
+            services.AddSingleton<IRabbitMQConnection>(sp =>
+            {
+                var factory = new ConnectionFactory()
+                {
+                    HostName = Configuration["EventBus:HostName"]
+                };
 
-            //    if (!string.IsNullOrEmpty(Configuration["EventBus:UserName"]))
-            //    {
-            //        factory.UserName = Configuration["EventBus:UserName"];
-            //    }
+                if (!string.IsNullOrEmpty(Configuration["EventBus:UserName"]))
+                {
+                    factory.UserName = Configuration["EventBus:UserName"];
+                }
 
-            //    if (!string.IsNullOrEmpty(Configuration["EventBus:Password"]))
-            //    {
-            //        factory.Password = Configuration["EventBus:Password"];
-            //    }
+                if (!string.IsNullOrEmpty(Configuration["EventBus:Password"]))
+                {
+                    factory.Password = Configuration["EventBus:Password"];
+                }
 
-            //    return new RabbitMQConnection(factory);
-            //});
+
+                return new RabbitMQConnection(factory);
+            });
 
             //services.AddSingleton<EventBusRabbitMQProducer>();
 
