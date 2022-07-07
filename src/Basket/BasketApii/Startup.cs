@@ -31,7 +31,8 @@ namespace BasketApii
         public void ConfigureServices(IServiceCollection services)
         {
 
-
+            services.AddControllers();
+           
             //add redis connection
 
             services.AddStackExchangeRedisCache(op =>
@@ -41,11 +42,19 @@ namespace BasketApii
 
 
             //addd inject service
-            services.AddScoped<IBasketRepository, BasketRepository>();
+       
+            services.AddTransient<IBasketRepository, BasketRepository>();
 
             // add auto maper
 
             services.AddAutoMapper(typeof(Startup));
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "BasketApii", Version = "v1" });
+            });
+
+
             //add rabbit mq connection 
             services.AddSingleton<IRabbitMQConnection>(sp =>
             {
@@ -68,13 +77,9 @@ namespace BasketApii
                 return new RabbitMQConnection(factory);
             });
 
-            //services.AddSingleton<EventBusRabbitMQProducer>();
+           services.AddSingleton<EventBusRabbitMQProducer>();
 
-            services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "BasketApii", Version = "v1" });
-            });
+          
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

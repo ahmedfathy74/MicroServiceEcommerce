@@ -18,15 +18,15 @@ namespace BasketApii.Repositories
 
         public async Task DeleteBasket(string userName)
         {
-             await _redisCache.RemoveAsync(userName);
-            
+            await _redisCache.RemoveAsync(userName);
+
         }
 
         //public async Task<bool> DeleteBaskett(string userName)
         //{
         //    // await _redisCache.RemoveAsync(userName);
         //    return await _redisCache
-        //                     .RemoveAsync(userName);
+        //                  .RemoveAsync(userName);
         //    //    .KeyDeleteAsync(userName);
         //}
 

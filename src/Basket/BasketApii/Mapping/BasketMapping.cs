@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using BasketApii.Entities;
-
+using EventBusRabbitMQ.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +12,7 @@ namespace BasketApii.Mapping
     {
         public BasketMapping()
         {
-           // CreateMap<BasketCheckout, BasketCheckoutEvent>().ReverseMap();
+            CreateMap<BasketCheckout, BasketCheckoutEvent>().ReverseMap();
         }
     }
 }

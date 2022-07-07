@@ -45,12 +45,12 @@ namespace EventBusRabbitMQ
             }
             if (IsConnected)
             {
-                //Console.WriteLine($"RabbitMQ persistent connection acquired a connection {_connection.Endpoint.HostName} and is subscribed to failure events");
+                Console.WriteLine($"RabbitMQ persistent connection acquired a connection {_connection.Endpoint.HostName} and is subscribed to failure events");
                 return true;
             }
             else
             {
-                //Console.WriteLine("FATAL ERROR: RabbitMQ connections could not be created and opened");
+                Console.WriteLine("FATAL ERROR: RabbitMQ connections could not be created and opened");
                 return false;
             }
 
